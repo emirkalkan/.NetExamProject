@@ -1,0 +1,17 @@
+﻿@model Cat;
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<img src="@Url.Content(ViewBag.Cat.ProfilePicture)" alt="profile picture" width="250" height="250" border="5"/>
+
+Thanks, for registering @Model.Name
+
+Thanks, @ViewBag.Thanks
+
+Thanks again, @ViewBag.Cat.Name whoose description is: @ViewBag.Cat.Description
+
+

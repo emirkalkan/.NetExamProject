@@ -1,0 +1,38 @@
+﻿@model List<Cat>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form asp-controller="Animal" asp-action="Index">
+    <p>
+        Title: <input type="text" name="SearchString" placeholder="Type here.." value="@(ViewBag.SearchString ?? String.Empty)">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<div class="container">
+    <div class="row">
+    @foreach (var item in Model) { 
+        <div class="card-col-12 col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"> <!-- ekran ölçülerine göre düzenliyor her biri 12 toplam alanımız, 12/12den 1 tane rowa, 12/6 dan 2 tane rowa mantığı var.-->
+            <img src="@Url.Content(item.ProfilePicture)" class="card-img-top" alt="profile picture" width="150" height="100" border=""/>
+            <div class="card-body">
+                <h5 class="card-title">Name: @Html.DisplayFor(modelItem => item.Name)</h5>
+                <p class="card-text">Description: @Html.DisplayFor(modelItem => item.Description)</p>
+                <p class="card-text">Species: @Html.DisplayFor(modelItem => item.Species.Name)</p>
+                <p class="card-text">Birth Date: @Html.DisplayFor(modelItem => item.BirthDate)</p>
+                <p class="card-text">Gender: @Html.DisplayFor(modelItem => item.Gender)</p>
+                @*<div class="card-footer">
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>*@
+                
+                <!--Html.ActionLink("Edit Me!", "Edit", "Animal", new { id = item.CatId }, null)-->
+                <a asp-controller="Animal" asp-action="Edit" asp-route-id="@item.CatId" class="btn btn-primary" style='background-color: red; width:100px; margin-left: 50'>Edit</a>
+            </div>
+        </div>
+    
+      }
+    </div>
+</div>

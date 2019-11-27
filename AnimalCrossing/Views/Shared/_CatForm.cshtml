@@ -1,0 +1,45 @@
+﻿@using AnimalCrossing.Models.ViewModels;
+
+@model AnimalCatVM;
+
+    <!--Html.ValidationSummary()-->
+    <div>
+        @Html.LabelFor(x => x.Cat.Name)
+        @Html.TextBoxFor(x => x.Cat.Name, new { @class = "form-control" })
+        @*<span asp-validation-for="Cat.Name" class="text-danger"></span>*@
+        @Html.ValidationMessageFor(x => x.Cat.Name, "", new { @class = "text-danger" })
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Cat.Description)
+        @Html.TextBoxFor(x => x.Cat.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Cat.Description, "", new { @class = "text-danger" })
+    </div>
+
+    <div>
+        @Html.DisplayName("Species")
+        <select asp-for="Cat.SpeciesId" asp-items="Model.SpeciesSelectList" class="form-control"> 
+            <option value="">Select something</option> 
+        </select>
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Cat.BirthDate)
+        @Html.TextBoxFor(x => x.Cat.BirthDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Cat.Gender)
+        @Html.DropDownListFor(x => x.Cat.Gender, Html.GetEnumSelectList<Gender>(), "Select your cats Gender",  new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Cat.Gender, "", new { @class = "text-danger" })
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Cat.ProfilePicture)
+        @Html.TextBoxFor(x => x.Cat.ProfilePicture, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Cat.ProfilePicture, "", new { @class = "text-danger" })
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary" style = 'margin-top: 20px' >Save Cat</button>
+    </div>
