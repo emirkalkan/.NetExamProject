@@ -21,12 +21,12 @@ namespace AnimalCrossing.Models
 
         public List<Cat> Find(string search)
         {
-            var cats = from m in _context.Cats
+            var cats = from m in _context.Cats.Include(c => c.Species)
                        select m;
 
             if (!String.IsNullOrEmpty(search))
             {
-                cats = cats.Include(cat => cat.Species.Name).Where(cat => cat.Name.Contains(search) ||
+                cats = cats.Where(cat => cat.Name.Contains(search) ||
                 cat.Description.Contains(search) || cat.Species.Name.Contains(search));
             }
 
@@ -36,7 +36,7 @@ namespace AnimalCrossing.Models
 
         public List<Cat> Get()
         {
-            return _context.Cats.ToList();
+            return _context.Cats.Include(c => c.Species).ToList();
         }
 
         public Cat Get(int catId)

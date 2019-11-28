@@ -60,5 +60,5 @@ namespace AnimalCrossing.Models
 
     }
     
-    public enum Gender { Male, Female, Other };
+    public enum Gender { Male = 0, Female = 1, Other = 2 };
 }

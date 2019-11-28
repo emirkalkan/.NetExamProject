@@ -61,8 +61,30 @@ namespace AnimalCrossing.Controllers
                 ViewBag.Cat = vm.Cat;
 
                 animalRepository.Save(vm.Cat);
+
+                if (vm.Cat.Gender == Gender.Male)
+                {
+                    IEnumerable<Cat> cats = this.animalRepository.Get().Where(c => c.SpeciesId == vm.Cat.SpeciesId &&
+                    (c.Gender == Gender.Female || c.Gender == Gender.Other));
+                    List<Cat> catList = cats.ToList();
+                    return View("Thanks", catList);
+                }
+                else if (vm.Cat.Gender == Gender.Female)
+                {
+                    IEnumerable<Cat> cats = this.animalRepository.Get().Where(c => c.SpeciesId == vm.Cat.SpeciesId &&
+                    (c.Gender == Gender.Other || c.Gender == Gender.Male));
+                    List<Cat> catList = cats.ToList();
+                    return View("Thanks", catList);
+                }
+                else
+                {
+                    IEnumerable<Cat> cats = this.animalRepository.Get().Where(c => c.SpeciesId == vm.Cat.SpeciesId &&
+                    (c.Gender == Gender.Male || c.Gender == Gender.Female));
+                    List<Cat> catList = new List<Cat>(cats);
+                    return View("Thanks", catList.ToList());
+                }
+
                 
-                return View("Thanks", vm.Cat);
             }
 
             return View(ViewModelCreator.CreateAnimalCatVm(speciesRepository));
@@ -78,6 +100,9 @@ namespace AnimalCrossing.Controllers
             Cat cat = animalRepository.Get(id);
             AnimalCatVM animalCatVM = new AnimalCatVM();
             animalCatVM.Cat = cat;
+            List<Species> species = this.speciesRepository.Get();
+
+            animalCatVM.SpeciesSelectList = new SelectList(species, "SpeciesId", "Name");
 
             return View(animalCatVM);
         }
@@ -93,7 +118,5 @@ namespace AnimalCrossing.Controllers
             }
             return View();
         }
-
-
     }
 }

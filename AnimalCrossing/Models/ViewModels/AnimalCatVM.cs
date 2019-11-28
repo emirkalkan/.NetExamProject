@@ -11,10 +11,5 @@ namespace AnimalCrossing.Models.ViewModels
         public AnimalCatVM()
         {
         }
-
-        public static implicit operator AnimalCatVM(Cat v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
