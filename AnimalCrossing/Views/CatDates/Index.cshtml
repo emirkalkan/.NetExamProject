@@ -1,0 +1,34 @@
+@model IEnumerable<AnimalCrossing.Models.CatDate>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form asp-controller="CatDates" asp-action="Index">
+    <p>
+        Title: <input type="text" name="SearchString" placeholder="Type here.." value="@(ViewBag.SearchString ?? String.Empty)">
+        <input type="submit" value="Filter"/>
+    </p>
+</form>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="container">
+    <div class="row">
+    @foreach (var item in Model) { 
+        <div class="card-col-12 col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"> <!-- ekran ölçülerine göre düzenliyor her biri 12 toplam alanımız, 12/12den 1 tane rowa, 12/6 dan 2 tane rowa mantığı var.-->
+            <div class="card-body">
+                <h5 class="card-title">Host Cat: @Html.DisplayFor(modelItem => item.HostCat)</h5>
+                <h5 class="card-text">Guest Cat: @Html.DisplayFor(modelItem => item.GuestCat)</h5>
+                <p class="card-text">Date Time: @Html.DisplayFor(modelItem => item.DateTime)</p>
+                <p class="card-text">Location: @Html.DisplayFor(modelItem => item.Location)</p>                
+                <a asp-controller="CatDates" asp-action="Edit" asp-route-id="@item.CatDateId" class="btn btn-primary" style='background-color: red; width:100px; margin-left: 50'>Edit</a>
+            </div>
+        </div>
+      }
+    </div>
+</div>

@@ -83,8 +83,6 @@ namespace AnimalCrossing.Controllers
                     List<Cat> catList = new List<Cat>(cats);
                     return View("Thanks", catList.ToList());
                 }
-
-                
             }
 
             return View(ViewModelCreator.CreateAnimalCatVm(speciesRepository));

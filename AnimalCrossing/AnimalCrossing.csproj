@@ -26,4 +26,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\ViewModels\CatDate.cs" />
+    <Compile Remove="Migrations\20191023134450_initial.cs" />
+    <Compile Remove="Migrations\20191023134450_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191128105315_InitialCatDate.cs" />
+    <Compile Remove="Migrations\20191128105315_InitialCatDate.Designer.cs" />
+    <Compile Remove="Migrations\AnimalCrossingContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20191128105637_InitialCatDate.Designer.cs" />
+    <Compile Remove="Migrations\20191128105637_InitialCatDate.cs" />
+  </ItemGroup>
 </Project>

@@ -7,6 +7,8 @@ namespace AnimalCrossing.Models.ViewModels
     {
         public Cat Cat { get; set; }
         public SelectList SpeciesSelectList { get; set; }
+        public SelectList CatSelectList { get; set; }
+        public CatDate CatDate { get; set; }
 
         public AnimalCatVM()
         {

@@ -22,6 +22,7 @@ namespace AnimalCrossing.Models
                     var species = new Species[] {
                         new Species { Name="Maine Coon", Description="Very big cat..." },
                         new Species { Name="Sphynx", Description="With the right spelling" },
+                        new Species { Name="Siamese", Description="Asian cat"},
                     };
 
                     context.Species.AddRange(species);
@@ -40,7 +41,9 @@ namespace AnimalCrossing.Models
                     var cats = new Cat[]
                     {
                         new Cat{ Name="Missy", Description="Likes walks on the beach", Gender=Gender.Female, BirthDate= new DateTime(2000, 4, 3),  ProfilePicture="https://www.zooplus.dk/magasin/wp-content/uploads/2018/01/fotolia_138361424-768x658.jpg", SpeciesId= speciesType[0].SpeciesId },
-                        new Cat{ Name="Baldy", Description="Likes something ", Gender=Gender.Female, BirthDate= new DateTime(2004, 4, 3),  ProfilePicture="https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555382975/shape/mentalfloss/sphinxhed.png", SpeciesId=speciesType[1].SpeciesId },
+                        new Cat{ Name="Baldy", Description="Likes something", Gender=Gender.Female, BirthDate= new DateTime(2004, 4, 3),  ProfilePicture="https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555382975/shape/mentalfloss/sphinxhed.png", SpeciesId=speciesType[1].SpeciesId },
+                        new Cat{ Name="Köpük", Description="Emir's cat", Gender=Gender.Female, BirthDate= new DateTime(2012, 2, 19),  ProfilePicture="https://www.kediforum.com/wp-content/uploads/2018/09/siyam-kedisi-kediforum-800x445.jpg", SpeciesId=speciesType[2].SpeciesId },
+
                     };
                     context.Cats.AddRange(cats);
 
