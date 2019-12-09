@@ -32,31 +32,16 @@ namespace AnimalCrossing.Controllers
         }
 
         // GET: CatDates
+        [AllowAnonymous]
         public IActionResult Index(string searchString)
         {
             List<CatDate> cats = this.catDateRepository.Find(searchString);
             ViewBag.SearchString = searchString;
-            return View("Index", cats.ToList());
+
+
+            return View("Index", cats.ToList()); 
             //return View(catDateRepository.Get());
         }
-
-        //// GET: CatDates/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var catDate = await _context.CatDates
-        //        .FirstOrDefaultAsync(m => m.CatDateId == id);
-        //    if (catDate == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(catDate);
-        //}
 
         // GET: CatDates/Create
         public IActionResult Create()
@@ -88,14 +73,18 @@ namespace AnimalCrossing.Controllers
             {
                 catDate.HostId = catDate.HostCat.CatId;
                 catDate.GuestId = catDate.GuestCat.CatId;
-                var guestCat = animalRepository.Get(catDate.GuestCat.CatId);
                 var hostCat = animalRepository.Get(catDate.HostCat.CatId);
-                catDate.HostCat.Name = hostCat.Name;
-                catDate.GuestCat.Name = guestCat.Name;
-
+                var guestCat = animalRepository.Get(catDate.GuestCat.CatId);
+                catDate.HostCat = hostCat;
+                catDate.GuestCat = guestCat;
+                ViewBag.HostCat = hostCat;
+                ViewBag.GuestCat = guestCat;
                 catDateRepository.Save(catDate);
             }
-            return RedirectToAction("Index");
+            
+            //IEnumerable<CatDate> cats = this.catDateRepository.Get();
+            //List<CatDate> catsDate = cats.ToList();
+            return View("Thanks", catDate);
         }
 
         // GET: CatDates/Edit/5

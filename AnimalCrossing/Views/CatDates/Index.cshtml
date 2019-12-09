@@ -1,4 +1,4 @@
-@model IEnumerable<AnimalCrossing.Models.CatDate>
+@model List<CatDate>
 
 @{
     ViewData["Title"] = "Index";
@@ -22,11 +22,16 @@
     @foreach (var item in Model) { 
         <div class="card-col-12 col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"> <!-- ekran ölçülerine göre düzenliyor her biri 12 toplam alanımız, 12/12den 1 tane rowa, 12/6 dan 2 tane rowa mantığı var.-->
             <div class="card-body">
-                <h5 class="card-title">Host Cat: @Html.DisplayFor(modelItem => item.HostCat)</h5>
-                <h5 class="card-text">Guest Cat: @Html.DisplayFor(modelItem => item.GuestCat)</h5>
+                <h5 class="card-title">Host Cat Id(For privacy reasons): @Html.DisplayFor(modelItem => item.HostId)</h5>
+                @*<img src="@Url.Content(item.HostCat.ProfilePicture)" class="card-img-top" alt="profile picture" width="150" height="100" border=""/>*@
+                @*<h5 class="card-title">Host Cat: @ViewBag.HostCat.Name</h5>*@
+                <h5 class="card-text">Guest Cat Id(For privacy reasons): @Html.DisplayFor(modelItem => item.GuestId)</h5>
+                @*<img src="@Url.Content(item.GuestCat.ProfilePicture)" class="card-img-top" alt="profile picture" width="150" height="100" border=""/>*@
+                @*<h5 class="card-text">Guest Cat: @ViewBag.GuestCat.Name</h5>*@
                 <p class="card-text">Date Time: @Html.DisplayFor(modelItem => item.DateTime)</p>
                 <p class="card-text">Location: @Html.DisplayFor(modelItem => item.Location)</p>                
                 <a asp-controller="CatDates" asp-action="Edit" asp-route-id="@item.CatDateId" class="btn btn-primary" style='background-color: red; width:100px; margin-left: 50'>Edit</a>
+                <a asp-controller="CatDates" asp-action="Delete" asp-route-id="@item.CatDateId" class="btn btn-primary" style='background-color: red; width:100px; margin-left: 50; margin-top:50'>Delete</a>
             </div>
         </div>
       }

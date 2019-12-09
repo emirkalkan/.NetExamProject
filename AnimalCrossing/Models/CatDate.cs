@@ -18,7 +18,6 @@ namespace AnimalCrossing.Models
 
         public string Location { get; set; }
 
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy hh:mm}")]
         public DateTime DateTime { get; set; }
 
        
