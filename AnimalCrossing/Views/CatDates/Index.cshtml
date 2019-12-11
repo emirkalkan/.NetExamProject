@@ -30,7 +30,7 @@
                 @*<h5 class="card-text">Guest Cat: @ViewBag.GuestCat.Name</h5>*@
                 <p class="card-text">Date Time: @Html.DisplayFor(modelItem => item.DateTime)</p>
                 <p class="card-text">Location: @Html.DisplayFor(modelItem => item.Location)</p>                
-                <a asp-controller="CatDates" asp-action="Edit" asp-route-id="@item.CatDateId" class="btn btn-primary" style='background-color: red; width:100px; margin-left: 50'>Edit</a>
+                <a asp-controller="CatDates" asp-action="Edit" asp-route-id="@item.CatDateId" class="btn btn-primary" style='background-color: blue; width:100px; margin-left: 50'>Edit</a>
                 <a asp-controller="CatDates" asp-action="Delete" asp-route-id="@item.CatDateId" class="btn btn-primary" style='background-color: red; width:100px; margin-left: 50; margin-top:50'>Delete</a>
             </div>
         </div>

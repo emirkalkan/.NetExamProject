@@ -32,11 +32,16 @@ namespace AnimalCrossingApi
             services.AddDbContext<AnimalApiContext>(opt =>
                opt.UseInMemoryDatabase("TodoList"));
 
+            services.AddDbContext<AnimalDateApiContext>(opt =>
+               opt.UseInMemoryDatabase("TodoList2"));
 
             // Add automapper
             services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
+
+            services.AddDbContext<AnimalDateApiContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("AnimalDateApiContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

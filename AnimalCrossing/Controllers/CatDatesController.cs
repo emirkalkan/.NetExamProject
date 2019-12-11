@@ -33,11 +33,14 @@ namespace AnimalCrossing.Controllers
 
         // GET: CatDates
         [AllowAnonymous]
-        public IActionResult Index(string searchString)
+        public IActionResult Index()
         {
-            List<CatDate> cats = this.catDateRepository.Find(searchString);
-            ViewBag.SearchString = searchString;
+            List<CatDate> cats = this.catDateRepository.Get();
+            //ViewBag.SearchString = searchString;
 
+
+            List<Cat> cat = animalRepository.Get();
+            ViewBag.CatList = new SelectList(cat, "CatId", "Name");
 
             return View("Index", cats.ToList()); 
             //return View(catDateRepository.Get());
@@ -85,6 +88,7 @@ namespace AnimalCrossing.Controllers
             //IEnumerable<CatDate> cats = this.catDateRepository.Get();
             //List<CatDate> catsDate = cats.ToList();
             return View("Thanks", catDate);
+
         }
 
         // GET: CatDates/Edit/5
@@ -100,6 +104,8 @@ namespace AnimalCrossing.Controllers
             {
                 return NotFound();
             }
+            List<Cat> cat = animalRepository.Get();
+            ViewBag.CatList = new SelectList(cat, "CatId", "Name");
             return View(catDate);
         }
 
@@ -108,13 +114,8 @@ namespace AnimalCrossing.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("CatDateId,HostId,GuestId,Location,DateTime")] CatDate catDate)
+        public IActionResult Edit(CatDate catDate)
         {
-            if (id != catDate.CatDateId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try

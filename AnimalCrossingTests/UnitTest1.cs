@@ -87,5 +87,24 @@ namespace AnimalCrossingTests
             Assert.Equal("Index", redirectToActionResult.ActionName);
             mockRepo.Verify();
         }
+
+        [Fact]
+        public void DeleteMethodTest()
+        {
+            var mockRepo = new Mock<ISpeciesRepository>();
+            int id = 1;
+            mockRepo.Setup(repo => repo.Get())
+               .Returns(DataTestService.GetTestSpecies());
+            var controller = new SpeciesController(mockRepo.Object);
+
+            // Act
+            var result = controller.DeleteConfirmed(id);
+
+            // Assert
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Null(redirectToActionResult.ControllerName);
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+            mockRepo.Verify();
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace AnimalCrossing.Models
         public int GuestId { get; set; } //CatId
         public Cat GuestCat { get; set; }
 
+        [Required]
         public string Location { get; set; }
 
         public DateTime DateTime { get; set; }
