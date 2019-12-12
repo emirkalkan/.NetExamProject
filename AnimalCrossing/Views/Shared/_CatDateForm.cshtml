@@ -4,13 +4,13 @@
 
     <div>
         @Html.DisplayName("Host Cat")
-        @Html.DropDownListFor(x => x.CatDate.HostCat, Model.CatSelectList, "Select your cat name", new { @class = "form-control"})
+        @Html.DropDownListFor(x => x.CatDate.HostId, Model.CatSelectList, "Select your cat name", new { @class = "form-control"})
         @Html.ValidationMessageFor(x => x.CatDate.HostCat, "", new { @class = "text-danger" })
         @*<span asp-validation-for="CatDate.HostId" class="text-danger"></span>*@
     </div>
     <div>
         @Html.DisplayName("Guest Cat")
-        @Html.DropDownListFor(x => x.CatDate.GuestCat, Model.CatSelectList, "Select your date cat name", new { @class = "form-control" })
+        @Html.DropDownListFor(x => x.CatDate.GuestId, Model.CatSelectList, "Select your date cat name", new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.CatDate.GuestCat, "", new { @class = "text-danger" })
     </div>
 

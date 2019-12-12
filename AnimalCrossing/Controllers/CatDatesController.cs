@@ -48,14 +48,8 @@ namespace AnimalCrossing.Controllers
         [HttpPost]
         public IActionResult Create(CatDate catDate)
         {
-            ModelState.Remove("HostCat.Gender");
-            ModelState.Remove("HostCat.Description");
-            ModelState.Remove("HostCat.ProfilePicture");
-            ModelState.Remove("HostCat.Name");
-            ModelState.Remove("GuestCat.Gender");
-            ModelState.Remove("GuestCat.Description");
-            ModelState.Remove("GuestCat.ProfilePicture");
-            ModelState.Remove("GuestCat.Name");
+            ModelState.Remove("catDate.HostCat");
+            ModelState.Remove("catDate.GuestCat");
             if (ModelState.IsValid)
             {
                 var hostCat = animalRepository.Get(catDate.HostId);
@@ -108,14 +102,8 @@ namespace AnimalCrossing.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(CatDate catDate)
         {
-            ModelState.Remove("HostCat.Gender");
-            ModelState.Remove("HostCat.Description");
-            ModelState.Remove("HostCat.ProfilePicture");
-            ModelState.Remove("HostCat.Name");
-            ModelState.Remove("GuestCat.Gender");
-            ModelState.Remove("GuestCat.Description");
-            ModelState.Remove("GuestCat.ProfilePicture");
-            ModelState.Remove("GuestCat.Name");
+            ModelState.Remove("catDate.HostCat");
+            ModelState.Remove("catDate.GuestCat");
             if (ModelState.IsValid)
             {
                 try
