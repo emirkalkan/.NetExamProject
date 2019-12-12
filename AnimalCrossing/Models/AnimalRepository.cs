@@ -17,6 +17,7 @@ namespace AnimalCrossing.Models
         public void Delete(int catId)
         {
             _context.Cats.Remove(this.Get(catId));
+            _context.SaveChanges();
         }
 
         public List<Cat> Find(string search)
@@ -29,9 +30,7 @@ namespace AnimalCrossing.Models
                 cats = cats.Where(cat => cat.Name.Contains(search) ||
                 cat.Description.Contains(search) || cat.Species.Name.Contains(search));
             }
-
             return cats.ToList();
-
         }
 
         public List<Cat> Get()
@@ -54,7 +53,6 @@ namespace AnimalCrossing.Models
             {
                 _context.Cats.Update(c);
             }
-
             _context.SaveChanges();
         }
     }

@@ -16,7 +16,15 @@ namespace AnimalCrossing.Models.ViewModels
             
         }
 
-        public ViewModelCreator()
+        public static AnimalCatVM CreateAnimalCatDateVm(IAnimalRepository animalRepository)
+        {
+            return new AnimalCatVM()
+            {
+                CatDate = new CatDate(),
+                CatSelectList = new SelectList(animalRepository.Get(), "CatId", "Name")
+            };
+        }
+            public ViewModelCreator()
         {
         }
     }

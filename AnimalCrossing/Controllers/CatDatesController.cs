@@ -15,12 +15,6 @@ namespace AnimalCrossing.Controllers
     [Authorize]
     public class CatDatesController : Controller
     {
-        //private readonly AnimalCrossingContext _context;
-
-        //public CatDatesController(AnimalCrossingContext context)
-        //{
-        //    _context = context;
-        //}
         private ICatDateRepository catDateRepository;
         private IAnimalRepository animalRepository;
 
@@ -28,42 +22,32 @@ namespace AnimalCrossing.Controllers
         {
             this.catDateRepository = catDateRepo;
             this.animalRepository = animalRepo;
-
         }
 
         // GET: CatDates
-        [AllowAnonymous]
-        public IActionResult Index()
+        //[AllowAnonymous] option 
+        public IActionResult Index(String searchString)
         {
-            List<CatDate> cats = this.catDateRepository.Get();
-            //ViewBag.SearchString = searchString;
-
-
-            List<Cat> cat = animalRepository.Get();
-            ViewBag.CatList = new SelectList(cat, "CatId", "Name");
+            List<CatDate> cats = this.catDateRepository.Find(searchString);
+            ViewBag.SearchString = searchString;
 
             return View("Index", cats.ToList()); 
-            //return View(catDateRepository.Get());
         }
 
         // GET: CatDates/Create
         public IActionResult Create()
         {
-            List<Cat> cat = animalRepository.Get();
-            //AnimalCatVM animalCatVM = new AnimalCatVM();
-            //animalCatVM.CatSelectList = new SelectList(cat, "CatId", "Name");
-            ViewBag.CatList = new SelectList(cat, "CatId", "Name");
-            return View();
+            //List<Cat> cat = animalRepository.Get();
+            //ViewBag.CatList = new SelectList(cat, "CatId", "Name");
+            return View(ViewModelCreator.CreateAnimalCatDateVm(animalRepository));
         }
 
         // POST: CatDates/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Create(CatDate catDate)
         {
-            // catDate.HostCat.CatId
             ModelState.Remove("HostCat.Gender");
             ModelState.Remove("HostCat.Description");
             ModelState.Remove("HostCat.ProfilePicture");
@@ -74,21 +58,25 @@ namespace AnimalCrossing.Controllers
             ModelState.Remove("GuestCat.Name");
             if (ModelState.IsValid)
             {
-                catDate.HostId = catDate.HostCat.CatId;
-                catDate.GuestId = catDate.GuestCat.CatId;
-                var hostCat = animalRepository.Get(catDate.HostCat.CatId);
-                var guestCat = animalRepository.Get(catDate.GuestCat.CatId);
+                var hostCat = animalRepository.Get(catDate.HostId);
+                var guestCat = animalRepository.Get(catDate.GuestId);
                 catDate.HostCat = hostCat;
                 catDate.GuestCat = guestCat;
-                ViewBag.HostCat = hostCat;
-                ViewBag.GuestCat = guestCat;
+
                 catDateRepository.Save(catDate);
+                return RedirectToAction(nameof(Thanks), catDate);
             }
             
-            //IEnumerable<CatDate> cats = this.catDateRepository.Get();
-            //List<CatDate> catsDate = cats.ToList();
-            return View("Thanks", catDate);
+            return View(ViewModelCreator.CreateAnimalCatDateVm(animalRepository));
 
+        }
+
+        public IActionResult Thanks(CatDate catDate)
+        {
+            catDate.HostCat = animalRepository.Get(catDate.HostId);
+            catDate.GuestCat = animalRepository.Get(catDate.GuestId);
+
+            return View("Thanks", catDate);
         }
 
         // GET: CatDates/Edit/5
@@ -104,9 +92,13 @@ namespace AnimalCrossing.Controllers
             {
                 return NotFound();
             }
-            List<Cat> cat = animalRepository.Get();
-            ViewBag.CatList = new SelectList(cat, "CatId", "Name");
-            return View(catDate);
+            AnimalCatVM animalCatVM = new AnimalCatVM();
+            animalCatVM.CatDate = catDate;
+
+            List<Cat> cats = this.animalRepository.Get();
+            animalCatVM.CatSelectList = new SelectList(cats, "CatId", "Name");
+
+            return View(animalCatVM);
         }
 
         // POST: CatDates/Edit/5
@@ -116,10 +108,23 @@ namespace AnimalCrossing.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(CatDate catDate)
         {
+            ModelState.Remove("HostCat.Gender");
+            ModelState.Remove("HostCat.Description");
+            ModelState.Remove("HostCat.ProfilePicture");
+            ModelState.Remove("HostCat.Name");
+            ModelState.Remove("GuestCat.Gender");
+            ModelState.Remove("GuestCat.Description");
+            ModelState.Remove("GuestCat.ProfilePicture");
+            ModelState.Remove("GuestCat.Name");
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var hostCat = animalRepository.Get(catDate.HostId);
+                    var guestCat = animalRepository.Get(catDate.GuestId);
+                    catDate.HostCat = hostCat;
+                    catDate.GuestCat = guestCat;
+
                     catDateRepository.Save(catDate);
                 }
                 catch (DbUpdateConcurrencyException)

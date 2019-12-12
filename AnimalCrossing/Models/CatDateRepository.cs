@@ -23,7 +23,7 @@ namespace AnimalCrossing.Models
 
         public List<CatDate> Find(string search)
         {
-            var cats = from m in _context.CatDates
+            var cats = from m in _context.CatDates.Include(x => x.HostCat).Include(y => y.GuestCat)
                        select m;
 
             if (!String.IsNullOrEmpty(search))
@@ -36,7 +36,7 @@ namespace AnimalCrossing.Models
 
         public List<CatDate> Get()
         {
-            return _context.CatDates.ToList();
+            return _context.CatDates.Include(x => x.HostCat).Include(y => y.GuestCat).ToList();
         }
 
         public CatDate Get(int catDateId)
@@ -54,7 +54,6 @@ namespace AnimalCrossing.Models
             {
                 _context.CatDates.Update(c);
             }
-
             _context.SaveChanges();
         }
     }

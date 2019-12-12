@@ -35,5 +35,6 @@
     <Compile Remove="Migrations\AnimalCrossingContextModelSnapshot.cs" />
     <Compile Remove="Migrations\20191128105637_InitialCatDate.Designer.cs" />
     <Compile Remove="Migrations\20191128105637_InitialCatDate.cs" />
+    <Compile Remove="Models\ViewModels\ViewModelCatDateCreator.cs" />
   </ItemGroup>
 </Project>

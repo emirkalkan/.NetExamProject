@@ -99,7 +99,6 @@ namespace AnimalCrossing.Controllers
             AnimalCatVM animalCatVM = new AnimalCatVM();
             animalCatVM.Cat = cat;
             List<Species> species = this.speciesRepository.Get();
-
             animalCatVM.SpeciesSelectList = new SelectList(species, "SpeciesId", "Name");
 
             return View(animalCatVM);

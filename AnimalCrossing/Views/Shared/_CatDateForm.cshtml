@@ -1,29 +1,29 @@
-﻿@using AnimalCrossing.Models;
+﻿@using AnimalCrossing.Models.ViewModels;
 
-@model CatDate
+@model AnimalCatVM
 
-    <!--Html.ValidationSummary()-->
     <div>
         @Html.DisplayName("Host Cat")
-        @Html.DropDownListFor(x => x.HostCat.CatId, (SelectList)ViewBag.CatList, "Select your cat name", new { @class = "form-control"})
-        @*@Html.ValidationMessageFor(x => x.HostCat.CatId, "", new { @class = "text-danger" })*@
+        @Html.DropDownListFor(x => x.CatDate.HostCat, Model.CatSelectList, "Select your cat name", new { @class = "form-control"})
+        @Html.ValidationMessageFor(x => x.CatDate.HostCat, "", new { @class = "text-danger" })
+        @*<span asp-validation-for="CatDate.HostId" class="text-danger"></span>*@
     </div>
     <div>
         @Html.DisplayName("Guest Cat")
-        @Html.DropDownListFor(x => x.GuestCat.CatId, (SelectList)ViewBag.CatList, "Select your date cat name", new { @class = "form-control" })
-        @*@Html.ValidationMessageFor(x => x.GuestCat.CatId, "", new { @class = "text-danger" })*@
+        @Html.DropDownListFor(x => x.CatDate.GuestCat, Model.CatSelectList, "Select your date cat name", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.CatDate.GuestCat, "", new { @class = "text-danger" })
     </div>
 
     <div>
-        @Html.LabelFor(x => x.Location)
-        @Html.TextBoxFor(x => x.Location, new { @class = "form-control" })
-        @*@Html.ValidationMessageFor(x => x.Location, "", new { @class = "text-danger" })*@
+        @Html.LabelFor(x => x.CatDate.Location)
+        @Html.TextBoxFor(x => x.CatDate.Location, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.CatDate.Location, "", new { @class = "text-danger" })
     </div>
 
     <div>
-        @Html.LabelFor(x => x.DateTime)
-        @Html.TextBoxFor(x => x.DateTime, "{0:MM/dd/yyyy hh:mm}", new { @class = "form-control", type = "datetime-local" })
-        @*@Html.ValidationMessageFor(x => x.DateTime, "", new { @class = "text-danger" })*@
+        @Html.LabelFor(x => x.CatDate.DateTime)
+        @Html.TextBoxFor(x => x.CatDate.DateTime, "{0:dd/MM/yyyy hh:mm}", new { @class = "form-control", type = "datetime-local" })
+        @*@Html.ValidationMessageFor(x => x.CatDate.DateTime, "", new { @class = "text-danger" })*@
     </div>
     <div>
         <button type="submit" class="btn btn-primary" style='margin-top: 20px'>Save Date</button>
