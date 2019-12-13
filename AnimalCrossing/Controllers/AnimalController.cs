@@ -113,7 +113,39 @@ namespace AnimalCrossing.Controllers
                 // Save it to the database
                 return RedirectToAction("Index");
             }
-            return View();
+            AnimalCatVM animalCatVM = new AnimalCatVM();
+            animalCatVM = c;
+            List<Species> species = this.speciesRepository.Get();
+            animalCatVM.SpeciesSelectList = new SelectList(species, "SpeciesId", "Name");
+
+            return View(animalCatVM);
         }
+
+        // GET: CatDates/Delete/5
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cat = animalRepository.Get((int)id);
+            if (cat == null)
+            {
+                return NotFound();
+            }
+            return View(cat);
+        }
+
+        // POST: CatDates/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            animalRepository.Delete(id);
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

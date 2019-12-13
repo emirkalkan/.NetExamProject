@@ -29,7 +29,9 @@
                 </div>*@
                 
                 <!--Html.ActionLink("Edit Me!", "Edit", "Animal", new { id = item.CatId }, null)-->
-                <a asp-controller="Animal" asp-action="Edit" asp-route-id="@item.CatId" class="btn btn-primary" style='background-color: red; width:100px; margin-left: 50'>Edit</a>
+                <a asp-controller="Animal" asp-action="Edit" asp-route-id="@item.CatId" class="btn btn-primary" style='background-color: blue; width:100px; margin:5px'>Edit</a>
+                <a asp-controller="Animal" asp-action="Delete" asp-route-id="@item.CatId" class="btn btn-primary" style='background-color:red; width:100px; margin:5px'>Delete</a>
+
             </div>
         </div>
     

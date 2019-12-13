@@ -25,7 +25,7 @@ namespace AnimalCrossing.Controllers
         }
 
         // GET: CatDates
-        //[AllowAnonymous] option 
+        [AllowAnonymous] 
         public IActionResult Index(String searchString)
         {
             List<CatDate> cats = this.catDateRepository.Find(searchString);
@@ -128,7 +128,12 @@ namespace AnimalCrossing.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catDate);
+            AnimalCatVM animalCatVM = new AnimalCatVM();
+            animalCatVM.CatDate = catDate;
+
+            List<Cat> cats = this.animalRepository.Get();
+            animalCatVM.CatSelectList = new SelectList(cats, "CatId", "Name");
+            return View(animalCatVM);
         }
 
         // GET: CatDates/Delete/5
