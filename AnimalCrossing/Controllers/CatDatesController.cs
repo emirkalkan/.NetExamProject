@@ -69,7 +69,7 @@ namespace AnimalCrossing.Controllers
         {
             catDate.HostCat = animalRepository.Get(catDate.HostId);
             catDate.GuestCat = animalRepository.Get(catDate.GuestId);
-
+            ViewBag.Location = catDate.Location;
             return View("Thanks", catDate);
         }
 
