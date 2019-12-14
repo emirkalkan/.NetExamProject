@@ -51,6 +51,22 @@ namespace AnimalCrossing.Models
                     context.SaveChanges();
                 }
 
+                if (!context.CatDates.Any())
+                {
+                    var catDatesType = context.CatDates.ToList();
+
+                    DateTime value = new DateTime(2017, 1, 18);
+
+                    var catDates = new CatDate[]
+                    {
+                        new CatDate{ Location= "Istanbul", DateTime=value, GuestId = catDatesType[1].HostId, HostId = catDatesType[0].HostId, HostCat= catDatesType[0].HostCat, GuestCat= catDatesType[1].GuestCat },
+                        new CatDate{ Location= "Copenhagen", DateTime=value, GuestId = catDatesType[0].HostId, HostId = catDatesType[1].HostId, HostCat= catDatesType[1].HostCat, GuestCat= catDatesType[0].GuestCat },
+                    };
+                    context.CatDates.AddRange(catDates);
+
+
+                    context.SaveChanges();
+                }
 
             }
 

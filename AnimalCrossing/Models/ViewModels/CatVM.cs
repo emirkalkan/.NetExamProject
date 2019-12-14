@@ -7,7 +7,6 @@ namespace AnimalCrossing.Models.ViewModels
     {
         public int CatId { get; set; }
 
-
         public string Name { get; set; }
 
         public string ProfilePicture { get; set; }

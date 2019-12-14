@@ -80,8 +80,8 @@ namespace AnimalCrossing.Controllers
                 {
                     IEnumerable<Cat> cats = this.animalRepository.Get().Where(c => c.SpeciesId == vm.Cat.SpeciesId &&
                     (c.Gender == Gender.Male || c.Gender == Gender.Female));
-                    List<Cat> catList = new List<Cat>(cats);
-                    return View("Thanks", catList.ToList());
+                    List<Cat> catList = cats.ToList();
+                    return View("Thanks", catList);
                 }
             }
 

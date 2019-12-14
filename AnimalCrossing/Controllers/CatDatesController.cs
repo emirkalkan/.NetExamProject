@@ -25,7 +25,7 @@ namespace AnimalCrossing.Controllers
         }
 
         // GET: CatDates
-        [AllowAnonymous] 
+        //[AllowAnonymous] optional
         public IActionResult Index(String searchString)
         {
             List<CatDate> cats = this.catDateRepository.Find(searchString);

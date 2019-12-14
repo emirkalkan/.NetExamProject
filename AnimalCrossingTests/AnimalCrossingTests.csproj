@@ -17,4 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AnimalCrossing\AnimalCrossing.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="UnitTestCat.cs" />
+  </ItemGroup>
 </Project>
