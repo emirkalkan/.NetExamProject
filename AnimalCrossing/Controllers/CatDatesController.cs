@@ -99,25 +99,25 @@ namespace AnimalCrossing.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(CatDate catDate)
+        public IActionResult Edit(int id, AnimalCatVM animalCat)
         {
+            animalCat.CatDate.CatDateId = id;
             ModelState.Remove("catDate.HostCat");
             ModelState.Remove("catDate.GuestCat");
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var hostCat = animalRepository.Get(catDate.HostId);
-                    var guestCat = animalRepository.Get(catDate.GuestId);
-                    catDate.HostCat = hostCat;
-                    catDate.GuestCat = guestCat;
-
-                    catDateRepository.Save(catDate);
+                    var hostCat = animalRepository.Get(animalCat.CatDate.HostId);
+                    var guestCat = animalRepository.Get(animalCat.CatDate.GuestId);
+                    animalCat.CatDate.HostCat = hostCat;
+                    animalCat.CatDate.GuestCat = guestCat;
+       
+                    catDateRepository.Save(animalCat.CatDate);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CatDateExists(catDate.CatDateId))
+                    if (!CatDateExists(animalCat.CatDate.CatDateId))
                     {
                         return NotFound();
                     }
@@ -129,7 +129,7 @@ namespace AnimalCrossing.Controllers
                 return RedirectToAction(nameof(Index));
             }
             AnimalCatVM animalCatVM = new AnimalCatVM();
-            animalCatVM.CatDate = catDate;
+            animalCatVM.CatDate = animalCat.CatDate;
 
             List<Cat> cats = this.animalRepository.Get();
             animalCatVM.CatSelectList = new SelectList(cats, "CatId", "Name");

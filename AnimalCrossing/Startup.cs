@@ -33,6 +33,7 @@ namespace AnimalCrossing
             services.AddTransient<ISpeciesRepository, SpeciesRepository>();
             services.AddTransient<IAnimalRepository, AnimalRepository>();
             services.AddTransient<ICatDateRepository, CatDateRepository>();
+            services.AddTransient<IReviewRepository, ReviewRepository>();
 
             services.AddDbContext<AnimalCrossingContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("AnimalCrossingContext")));

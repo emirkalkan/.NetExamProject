@@ -36,5 +36,11 @@
     <Compile Remove="Migrations\20191128105637_InitialCatDate.Designer.cs" />
     <Compile Remove="Migrations\20191128105637_InitialCatDate.cs" />
     <Compile Remove="Models\ViewModels\ViewModelCatDateCreator.cs" />
+    <Compile Remove="Migrations\AnimalCrossingIdentityDb\20191118115837_CreateIdentitySchema.cs" />
+    <Compile Remove="Migrations\AnimalCrossingIdentityDb\AnimalCrossingIdentityDbContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20191128092127_InitialCreate.cs" />
+    <Compile Remove="Migrations\20191128105902_InitialCatDate.cs" />
+    <Compile Remove="Migrations\20191128105902_InitialCatDate.Designer.cs" />
+    <Compile Remove="Migrations\20191128092127_InitialCreate.Designer.cs" />
   </ItemGroup>
 </Project>

@@ -57,7 +57,7 @@ namespace AnimalCrossing.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime?>("DateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("GuestCatCatId")
@@ -73,6 +73,7 @@ namespace AnimalCrossing.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Location")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("CatDateId");
@@ -82,6 +83,31 @@ namespace AnimalCrossing.Migrations
                     b.HasIndex("HostCatCatId");
 
                     b.ToTable("CatDates");
+                });
+
+            modelBuilder.Entity("AnimalCrossing.Models.Review", b =>
+                {
+                    b.Property<int>("ReviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("ReviewDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ReviewingCatId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ReviewId");
+
+                    b.HasIndex("ReviewingCatId");
+
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("AnimalCrossing.Models.Species", b =>
@@ -120,6 +146,15 @@ namespace AnimalCrossing.Migrations
                     b.HasOne("AnimalCrossing.Models.Cat", "HostCat")
                         .WithMany()
                         .HasForeignKey("HostCatCatId");
+                });
+
+            modelBuilder.Entity("AnimalCrossing.Models.Review", b =>
+                {
+                    b.HasOne("AnimalCrossing.Models.Cat", "ReviewingCat")
+                        .WithMany("Reviews")
+                        .HasForeignKey("ReviewingCatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

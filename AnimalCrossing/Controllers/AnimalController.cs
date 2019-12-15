@@ -18,11 +18,13 @@ namespace AnimalCrossing.Controllers
     {
         private IAnimalRepository animalRepository;
         private ISpeciesRepository speciesRepository;
+        private IReviewRepository reviewRepository;
 
-        public AnimalController(IAnimalRepository animalRepo, ISpeciesRepository s)
+        public AnimalController(IAnimalRepository animalRepo, ISpeciesRepository s, IReviewRepository r)
         {
             this.speciesRepository = s;
             this.animalRepository = animalRepo;
+            this.reviewRepository = r;
         }
 
 
@@ -32,7 +34,11 @@ namespace AnimalCrossing.Controllers
         {
             List<Cat> cats = this.animalRepository.Find(searchString);
             ViewBag.SearchString = searchString;
-            return View("ShowCats", cats.ToList());
+
+            List<Review> reviews = this.reviewRepository.Get().ToList();
+            ViewBag.Review = reviews;
+
+                return View("ShowCats", cats.ToList());
         }
 
 

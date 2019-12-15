@@ -30,7 +30,7 @@
         @*@Html.ValidationMessageFor(x => x.CatDate.DateTime, "", new { @class = "text-danger" })*@
     </div>
     <div>
-        <button type="submit" class="btn btn-primary" style='margin-top: 20px'>Save Date</button>
+        <button type="submit" @Model.CatDate.CatDateId class="btn btn-primary" style='margin-top: 20px'>Save Date</button>
     </div>
 
 }

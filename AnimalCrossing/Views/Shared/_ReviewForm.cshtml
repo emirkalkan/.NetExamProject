@@ -1,0 +1,31 @@
+﻿@using AnimalCrossing.Models.ViewModels;
+
+@model AnimalCatVM;
+
+    <!--Html.ValidationSummary()-->
+    <div>
+        @Html.LabelFor(x => x.Review.Comment)
+        @Html.TextBoxFor(x => x.Review.Comment, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Review.Comment, "", new { @class = "text-danger" })
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Review.Rating)
+        @Html.TextBoxFor(x => x.Review.Rating, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Review.Rating, "", new { @class = "text-danger" })
+    </div>
+
+    <div>
+        @Html.DisplayName("Review Cat")
+        @Html.DropDownListFor(x => x.Review.ReviewingCatId, Model.CatSelectList, "Select your review cat", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Review.ReviewingCatId, "", new { @class = "text-danger" })
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Review.ReviewDate)
+        @Html.TextBoxFor(x => x.Review.ReviewDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary" style = 'margin-top: 20px' >Save Review</button>
+    </div>

@@ -11,6 +11,8 @@ namespace AnimalCrossing.Models.ViewModels
         public CatDate CatDate { get; set; }
         public SelectList CatSelectList { get; set; }
 
+        public Review Review { get; set; }
+
         public AnimalCatVM()
         {
         }
