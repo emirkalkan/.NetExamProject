@@ -38,7 +38,11 @@ namespace AnimalCrossing.Controllers
             List<Review> reviews = this.reviewRepository.Get().ToList();
             ViewBag.Review = reviews;
 
-                return View("ShowCats", cats.ToList());
+            AnimalCatVM animalCatVM = new AnimalCatVM();
+            animalCatVM.ReviewList = reviews;
+            animalCatVM.CatList = cats.ToList();
+
+                return View("ShowCats", animalCatVM);
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AnimalCrossing.Models.ViewModels
@@ -12,6 +13,9 @@ namespace AnimalCrossing.Models.ViewModels
         public SelectList CatSelectList { get; set; }
 
         public Review Review { get; set; }
+
+        public List <Review> ReviewList { get; set; }
+        public List <Cat> CatList { get; set; } 
 
         public AnimalCatVM()
         {

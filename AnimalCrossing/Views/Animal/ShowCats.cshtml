@@ -1,4 +1,6 @@
-﻿@model List<Cat>
+﻿@model AnimalCrossing.Models.ViewModels.AnimalCatVM
+
+
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,7 +17,7 @@
 
 <div class="container">
     <div class="row">
-    @foreach (var item in Model) { 
+    @foreach (var item in Model.CatList) { 
         <div class="card-col-12 col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"> <!-- ekran ölçülerine göre düzenliyor her biri 12 toplam alanımız, 12/12den 1 tane rowa, 12/6 dan 2 tane rowa mantığı var.-->
             <img src="@Url.Content(item.ProfilePicture)" class="card-img-top" alt="profile picture" width="150" height="100" border=""/>
             <div class="card-body">
@@ -24,6 +26,25 @@
                 <p class="card-text">Species: @Html.DisplayFor(modelItem => item.Species.Name)</p>
                 <p class="card-text">Birth Date: @Html.DisplayFor(modelItem => item.BirthDate)</p>
                 <p class="card-text">Gender: @Html.DisplayFor(modelItem => item.Gender)</p>
+                <h3 style="text-decoration: underline; color: red">Reviews</h3>
+                <p class="card-text"> @foreach (var item2 in Model.ReviewList) {
+                    if( item.CatId == item2.ReviewingCatId)
+                    {
+                        int rating = 0;
+                        int length = item2.Comment.Length;
+                        for(int i=0; i< length ; i++)
+                        {
+                            rating = rating + item2.Rating;
+                        }
+                        int sum = rating / length;
+                        <p>Rating: @sum</p>
+                        <p>Comment: @Html.DisplayFor(modelItem => item2.Comment)</p>
+                        <p>Review Date: @Html.DisplayFor(modelItem => item2.ReviewDate)</p>
+                        <p>***************</p>
+                    }
+                }
+                </p>
+
                 @*<div class="card-footer">
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>*@
